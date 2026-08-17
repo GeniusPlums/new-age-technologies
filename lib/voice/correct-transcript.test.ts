@@ -13,6 +13,10 @@ describe('correctShoppingTranscript', () => {
     );
   });
 
+  it('maps makana back to makhana', () => {
+    expect(correctShoppingTranscript('masala makana.')).toBe('masala makhana.');
+  });
+
   it('leaves a real kurta query unchanged', () => {
     expect(correctShoppingTranscript('kurta under 500')).toBe('kurta under 500');
   });

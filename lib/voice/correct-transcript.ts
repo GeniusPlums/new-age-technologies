@@ -11,6 +11,8 @@ const REPLACEMENTS: Array<[RegExp, string]> = [
   [/\bkurtah\b/gi, 'kurta'],
   [/\bcurtains\b/gi, 'kurtas'],
   [/\bcurtain\b/gi, 'kurta'],
+  [/\bmakana\b/gi, 'makhana'],
+  [/\bmakhanas\b/gi, 'makhana'],
 ];
 
 export function correctShoppingTranscript(text: string): string {

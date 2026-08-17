@@ -71,11 +71,38 @@ function expandKeyword(keyword: string): string[] {
   return KEYWORD_ALIASES[lower] || [lower];
 }
 
+function tokenize(value: string): string[] {
+  return value
+    .toLowerCase()
+    .split(/[\s/_-]+/)
+    .map((token) => token.replace(/[^a-z0-9]/g, ''))
+    .filter(Boolean);
+}
+
 export function specificProductKeywords(keywords: string[]): string[] {
-  return keywords.filter((keyword) => {
-    const lower = keyword.toLowerCase();
-    return lower.length > 2 && !STOPWORDS.has(lower) && !/^\d+$/.test(lower);
+  return keywords.flatMap(tokenize).filter((keyword) => {
+    return keyword.length > 2 && !STOPWORDS.has(keyword) && !/^\d+$/.test(keyword);
   });
+}
+
+function productSearchText(product: Product): string {
+  return [product.name, product.description, product.brand, product.subcategory, ...product.tags]
+    .join(' ')
+    .toLowerCase();
+}
+
+function productMatchesKeyword(product: Product, keyword: string): boolean {
+  const productText = productSearchText(product);
+  return expandKeyword(keyword).some((alias) => productText.includes(alias));
+}
+
+function mergedSearchKeywords(context: ExtractedContext): string[] {
+  return Array.from(
+    new Set([
+      ...specificProductKeywords(context.keywords),
+      ...specificProductKeywords(tokenize(context.originalQuery || '')),
+    ])
+  );
 }
 
 function calculateCategoryScore(product: Product, context: ExtractedContext): number {
@@ -225,26 +252,18 @@ function calculatePreferenceScore(
 
 function calculateKeywordScore(
   product: Product,
-  context: ExtractedContext
+  keywords: string[]
 ): { score: number; reasons: string[] } {
-  if (context.keywords.length === 0) {
+  if (keywords.length === 0) {
     return { score: SCORE_WEIGHTS.keywords * 0.5, reasons: [] };
   }
 
-  const productText = [
-    product.name,
-    product.description,
-    product.brand,
-    product.subcategory,
-    ...product.tags,
-  ]
-    .join(' ')
-    .toLowerCase();
+  const productText = productSearchText(product);
 
   let matchedKeywords = 0;
   const reasons: string[] = [];
 
-  for (const keyword of context.keywords) {
+  for (const keyword of keywords) {
     const aliases = expandKeyword(keyword);
     if (aliases.some((alias) => productText.includes(alias))) {
       matchedKeywords++;
@@ -254,7 +273,7 @@ function calculateKeywordScore(
     }
   }
 
-  const score = (matchedKeywords / context.keywords.length) * SCORE_WEIGHTS.keywords;
+  const score = (matchedKeywords / keywords.length) * SCORE_WEIGHTS.keywords;
   return { score, reasons };
 }
 
@@ -262,15 +281,26 @@ export function matchProducts(
   products: Product[],
   context: ExtractedContext
 ): ScoredProduct[] {
-  const specificKeywords = specificProductKeywords(context.keywords).filter(
-    (keyword) => !CATEGORY_WORDS.has(keyword.toLowerCase())
+  const searchKeywords = mergedSearchKeywords(context);
+  const specificKeywords = searchKeywords.filter(
+    (keyword) => !CATEGORY_WORDS.has(keyword)
   );
+  const primaryKeyword = [...specificKeywords].sort((a, b) => b.length - a.length)[0];
 
   const scoredProducts: ScoredProduct[] = products
     .filter((p) => p.inStock)
     .filter((product) => {
       if (!context.budget.hasConstraint || !context.budget.max) return true;
       return product.price <= context.budget.max;
+    })
+    .filter((product) => {
+      if (primaryKeyword && primaryKeyword.length >= 4) {
+        return productMatchesKeyword(product, primaryKeyword);
+      }
+      if (specificKeywords.length > 0) {
+        return specificKeywords.some((keyword) => productMatchesKeyword(product, keyword));
+      }
+      return true;
     })
     .map((product) => {
       const categoryScore = calculateCategoryScore(product, context);
@@ -279,12 +309,14 @@ export function matchProducts(
         product,
         context
       );
-      const { score: keywordScore, reasons: kwReasons } = calculateKeywordScore(product, context);
+      const { score: keywordScore, reasons: kwReasons } = calculateKeywordScore(
+        product,
+        searchKeywords
+      );
 
       const totalScore = categoryScore + budgetScore + preferenceScore + keywordScore;
       const matchScore = Math.round(totalScore);
 
-      // Combine all reasons
       const matchReasons: string[] = [];
 
       if (context.budget.hasConstraint && context.budget.max && product.price <= context.budget.max) {
@@ -293,7 +325,6 @@ export function matchProducts(
 
       matchReasons.push(...prefReasons, ...kwReasons);
 
-      // Add generic reasons if we don't have enough
       if (matchReasons.length === 0) {
         if (product.rating >= 4.5) matchReasons.push('Highly rated');
         if (product.category === context.category) matchReasons.push(`Top ${context.category} pick`);
@@ -302,17 +333,11 @@ export function matchProducts(
       return {
         ...product,
         matchScore,
-        matchReasons: matchReasons.slice(0, 3), // Max 3 reasons
-        keywordScore,
+        matchReasons: matchReasons.slice(0, 3),
       };
     })
     .filter((p) => p.matchScore >= MINIMUM_SCORE_THRESHOLD)
-    .filter((p) => {
-      if (specificKeywords.length === 0) return true;
-      return p.keywordScore > 0;
-    })
-    .sort((a, b) => b.matchScore - a.matchScore)
-    .map(({ keywordScore: _keywordScore, ...product }) => product);
+    .sort((a, b) => b.matchScore - a.matchScore);
 
-  return scoredProducts.slice(0, 5); // Return top 5 matches
+  return scoredProducts.slice(0, 5);
 }

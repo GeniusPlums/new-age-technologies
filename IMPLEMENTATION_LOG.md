@@ -5,10 +5,10 @@
 Voice mode heard "kirtan" for "kurta under 500" and showed unrelated catalog photos. Added a production Playwright suite covering that miss plus homophones, budget, food vs fashion, and image loading. Whisper now gets a shopping prompt and kirtan→kurta correction; matching maps kirtan to kurtas, drops unknown terms, and hard-filters over-budget items. Catalog gained an Everyday Cotton Kurta at ₹449 so under-₹500 kurtas exist.
 
 **Tested**
-- `npx vitest run` — 28 passed
+- `npx vitest run` — 31 passed
 - `npm run lint` — pass
 - `npx tsc --noEmit` — pass
-- Production Playwright — pending deploy
+- Production Playwright — 19 passed, 7 failed (kurta/kirtan STT and search passed; follow-up matcher/image waits in this commit)
 
 ## 2026-08-17 — Product photos and voice mode
 

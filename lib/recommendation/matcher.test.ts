@@ -73,12 +73,44 @@ describe('matchProducts', () => {
       context({
         category: 'unknown',
         budget: { max: 500, hasConstraint: true },
-        keywords: ['xylophone'],
+        keywords: [],
         originalQuery: 'xylophone under 500',
       })
     );
 
     expect(results).toEqual([]);
+  });
+
+  it('keeps palazzo pants off track pants', () => {
+    const results = matchProducts(
+      products,
+      context({
+        category: 'fashion',
+        keywords: ['palazzo', 'pants'],
+        originalQuery: 'palazzo pants',
+      })
+    );
+
+    expect(results.map((product) => product.name)).toContain('Printed Palazzo Pants');
+    expect(results.map((product) => product.name)).not.toContain(
+      'Athletic Dry-Fit Track Pants'
+    );
+  });
+
+  it('returns in-budget casual wear instead of an empty list', () => {
+    const results = matchProducts(
+      products,
+      context({
+        category: 'fashion',
+        budget: { max: 1000, hasConstraint: true },
+        keywords: ['casual wear'],
+        originalQuery: 'casual wear under 1000',
+      })
+    );
+
+    expect(results.length).toBeGreaterThan(0);
+    expect(results.every((product) => product.category === 'fashion')).toBe(true);
+    expect(results.every((product) => product.price <= 1000)).toBe(true);
   });
 
   it('hard-filters products over the stated budget', () => {

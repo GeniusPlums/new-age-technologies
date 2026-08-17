@@ -100,16 +100,25 @@ export function expectNoKirtan(text: string, names: string[]) {
 }
 
 export async function loadedProductImages(page: Page) {
-  const images = page.getByTestId('product-image').or(page.locator('img[alt]'));
+  const images = page.getByTestId('product-image').or(page.locator('article img, [data-testid="product-card"] img, img[alt]'));
   const count = await images.count();
   const details: Array<{ alt: string; width: number; src: string }> = [];
+  const catalog = new Set(FOOD_PRODUCTS.concat(FASHION_PRODUCTS));
 
   for (let i = 0; i < count; i += 1) {
     const image = images.nth(i);
     const alt = (await image.getAttribute('alt')) || '';
-    if (!alt || FOOD_PRODUCTS.concat(FASHION_PRODUCTS).every((name) => name !== alt)) {
-      continue;
-    }
+    if (!catalog.has(alt)) continue;
+
+    await image.scrollIntoViewIfNeeded();
+    await expect
+      .poll(
+        async () =>
+          image.evaluate((el) => (el as HTMLImageElement).naturalWidth || 0),
+        { timeout: 15_000 }
+      )
+      .toBeGreaterThan(0);
+
     const info = await image.evaluate((el) => {
       const img = el as HTMLImageElement;
       return { width: img.naturalWidth, src: img.currentSrc || img.src };
