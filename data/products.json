@@ -7,7 +7,7 @@
       "category": "food",
       "subcategory": "snacks",
       "price": 299,
-      "imageUrl": "https://images.unsplash.com/photo-1499636136210-6f4ee39c176b?auto=format&fit=crop&w=900&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=80",
       "brand": "NutriBite",
       "dietary": {
         "isVegan": true,
@@ -35,7 +35,7 @@
       "category": "food",
       "subcategory": "breakfast",
       "price": 349,
-      "imageUrl": "https://images.unsplash.com/photo-1517094078144-2d15cec89054?auto=format&fit=crop&w=900&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=900&q=80",
       "brand": "MornFit",
       "dietary": {
         "isVegan": false,
@@ -119,7 +119,7 @@
       "category": "food",
       "subcategory": "breakfast",
       "price": 449,
-      "imageUrl": "https://images.unsplash.com/photo-1517093157656-b9eccef01cb1?auto=format&fit=crop&w=900&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=900&q=80",
       "brand": "MornFit",
       "dietary": {
         "isVegan": false,
@@ -173,7 +173,7 @@
       "category": "food",
       "subcategory": "snacks",
       "price": 549,
-      "imageUrl": "https://images.unsplash.com/photo-1536591371090-d341366ad729?auto=format&fit=crop&w=900&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&w=900&q=80",
       "brand": "NutriBox",
       "dietary": {
         "isVegan": true,
@@ -288,7 +288,7 @@
       "category": "fashion",
       "subcategory": "formal",
       "price": 1299,
-      "imageUrl": "https://images.unsplash.com/photo-1596755094514-f87e34085b83?auto=format&fit=crop&w=900&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=900&q=80",
       "brand": "ClassicWeave",
       "style": {
         "type": "formal",
@@ -319,7 +319,7 @@
       "category": "fashion",
       "subcategory": "ethnic",
       "price": 1899,
-      "imageUrl": "https://images.unsplash.com/photo-1583391733956-6c78276477e2?auto=format&fit=crop&w=900&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=900&q=80",
       "brand": "IndieThreads",
       "style": {
         "type": "ethnic",
