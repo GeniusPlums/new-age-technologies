@@ -1,7 +1,7 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Utensils, Shirt } from 'lucide-react';
+import { UtensilsCrossed, Shirt, Sparkles, Coffee } from 'lucide-react';
+import { BrandMark } from '@/components/brand/BrandMark';
 
 interface WelcomeMessageProps {
   onSampleQuery: (query: string) => void;
@@ -9,47 +9,62 @@ interface WelcomeMessageProps {
 
 const sampleQueries = [
   {
-    icon: Utensils,
+    icon: UtensilsCrossed,
     query: 'Vegan snacks under ₹300',
-    category: 'food',
+    label: 'Pantry',
   },
   {
     icon: Shirt,
     query: 'Light ethnic wear for summer',
-    category: 'fashion',
+    label: 'Wardrobe',
   },
   {
-    icon: Utensils,
+    icon: Coffee,
     query: 'Protein-rich breakfast options',
-    category: 'food',
+    label: 'Morning',
   },
   {
-    icon: Shirt,
+    icon: Sparkles,
     query: 'Casual wear under ₹1000',
-    category: 'fashion',
+    label: 'Everyday',
   },
 ];
 
 export function WelcomeMessage({ onSampleQuery }: WelcomeMessageProps) {
   return (
-    <div className="flex flex-col items-center justify-center h-full px-4 py-8 text-center">
-      <img src="/lumin.png" alt="lumin logo" className="w-16 h-16 object-contain mb-4" />
-      <h1 className="text-2xl font-bold mb-8">lumin</h1>
+    <div className="flex flex-col items-center justify-center min-h-[70vh] px-2 py-10 text-center animate-rise-in">
+      <div className="mb-6 flex items-center gap-2 rounded-full border border-border bg-card/80 px-3 py-1.5 text-xs uppercase tracking-[0.16em] text-muted-foreground">
+        <BrandMark size={18} />
+        Food & fashion, in your words
+      </div>
 
-      <div className="w-full max-w-lg">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {sampleQueries.map((item, index) => (
-            <Button
-              key={index}
-              variant="outline"
-              className="justify-start h-auto py-3 px-4 text-left"
-              onClick={() => onSampleQuery(item.query)}
-            >
-              <item.icon className="w-4 h-4 mr-2 shrink-0 text-primary" />
-              <span className="text-sm">{item.query}</span>
-            </Button>
-          ))}
-        </div>
+      <h1 className="font-display text-4xl sm:text-5xl leading-[1.08] tracking-tight max-w-xl mb-4">
+        Find what feels right.
+      </h1>
+      <p className="text-muted-foreground max-w-md mb-10 text-[15px] leading-relaxed">
+        Tell Lumin a craving, a budget, or a vibe. It will pull Indian D2C
+        makers that actually match.
+      </p>
+
+      <div className="w-full max-w-2xl grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {sampleQueries.map((item) => (
+          <button
+            key={item.query}
+            type="button"
+            onClick={() => onSampleQuery(item.query)}
+            className="group text-left rounded-2xl border border-border/80 bg-card/90 px-4 py-4 paper-shadow transition-all hover:-translate-y-0.5 hover:border-primary/30"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+                {item.label}
+              </span>
+              <item.icon className="w-4 h-4 text-primary" />
+            </div>
+            <span className="text-sm font-medium leading-snug group-hover:text-primary transition-colors">
+              {item.query}
+            </span>
+          </button>
+        ))}
       </div>
     </div>
   );

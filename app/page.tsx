@@ -1,28 +1,26 @@
 import { ChatContainer } from '@/components/chat/ChatContainer';
 import { CartSheet } from '@/components/cart/CartSheet';
+import { BrandMark } from '@/components/brand/BrandMark';
 
 export default function Home() {
   return (
-    <main className="h-screen flex flex-col bg-background">
-      {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <img
-              src="/lumin.png"
-              alt="lumin logo"
-              className="w-8 h-8 object-contain"
-            />
-            <span className="font-semibold text-lg">lumin</span>
+    <main className="relative h-screen flex flex-col overflow-hidden surface-grain">
+      <header className="relative z-20 px-4 pt-4 sm:px-6">
+        <div className="max-w-5xl mx-auto flex items-center justify-between rounded-full border border-border/70 bg-card/80 px-3 py-2 pl-3 pr-3 backdrop-blur-xl paper-shadow">
+          <div className="flex items-center gap-3 min-w-0">
+            <BrandMark size={36} />
+            <div className="min-w-0 leading-tight">
+              <p className="font-display text-[1.15rem] tracking-tight">Lumin</p>
+              <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground truncate">
+                Shopping atelier
+              </p>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
-            <CartSheet />
-          </div>
+          <CartSheet />
         </div>
       </header>
 
-      {/* Chat area */}
-      <div className="flex-1 overflow-hidden">
+      <div className="relative flex-1 overflow-hidden">
         <ChatContainer />
       </div>
     </main>

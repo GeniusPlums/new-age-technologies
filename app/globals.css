@@ -4,48 +4,51 @@
 
 @layer base {
   :root {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 0%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 0%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 68 63% 66%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 65%;
-    --accent: 0 0% 18%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 68 63% 66%;
-    --radius: 0;
+    --background: 32 42% 96%;
+    --foreground: 18 28% 12%;
+    --card: 36 50% 99%;
+    --card-foreground: 18 28% 12%;
+    --popover: 36 50% 99%;
+    --popover-foreground: 18 28% 12%;
+    --primary: 22 86% 46%;
+    --primary-foreground: 40 60% 98%;
+    --secondary: 32 28% 91%;
+    --secondary-foreground: 18 24% 18%;
+    --muted: 32 22% 92%;
+    --muted-foreground: 22 12% 42%;
+    --accent: 12 48% 94%;
+    --accent-foreground: 14 42% 28%;
+    --destructive: 4 72% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 30 18% 86%;
+    --input: 30 18% 86%;
+    --ring: 22 86% 46%;
+    --radius: 1.25rem;
+    --sage: 148 28% 32%;
+    --blush: 12 48% 94%;
+    --ink: 18 28% 12%;
   }
 
   .dark {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 0%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 0%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 68 63% 66%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 65%;
-    --accent: 0 0% 18%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 68 63% 66%;
+    --background: 22 18% 8%;
+    --foreground: 36 30% 96%;
+    --card: 22 16% 11%;
+    --card-foreground: 36 30% 96%;
+    --popover: 22 16% 11%;
+    --popover-foreground: 36 30% 96%;
+    --primary: 28 88% 58%;
+    --primary-foreground: 18 28% 10%;
+    --secondary: 22 14% 16%;
+    --secondary-foreground: 36 30% 96%;
+    --muted: 22 12% 16%;
+    --muted-foreground: 30 12% 68%;
+    --accent: 14 24% 18%;
+    --accent-foreground: 36 30% 96%;
+    --destructive: 4 62% 42%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 22 12% 20%;
+    --input: 22 12% 20%;
+    --ring: 28 88% 58%;
   }
 }
 
@@ -53,35 +56,63 @@
   * {
     @apply border-border;
   }
+
+  html,
   body {
-    @apply bg-background text-foreground;
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01" on, "cv11" on;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-fraunces), Georgia, serif;
+  }
+
+  .surface-grain {
+    background-image:
+      radial-gradient(1200px 600px at 12% -10%, hsl(28 90% 72% / 0.22), transparent 55%),
+      radial-gradient(900px 500px at 92% 8%, hsl(12 70% 78% / 0.18), transparent 50%),
+      radial-gradient(700px 420px at 50% 110%, hsl(148 30% 70% / 0.12), transparent 55%);
+  }
+
+  .paper-shadow {
+    box-shadow:
+      0 1px 1px hsl(22 30% 20% / 0.04),
+      0 12px 32px -16px hsl(22 30% 20% / 0.18);
   }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--muted));
-  border-radius: 0;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground) / 0.3);
-  border-radius: 0;
+  background: hsl(var(--muted-foreground) / 0.22);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground) / 0.5);
+  background: hsl(var(--muted-foreground) / 0.38);
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
-/* Chat message animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -89,11 +120,25 @@
   }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.3s ease-out;
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-/* Typing indicator */
+.animate-fade-in {
+  animation: fadeIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animate-rise-in {
+  animation: riseIn 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 @keyframes bounce {
   0%, 60%, 100% {
     transform: translateY(0);

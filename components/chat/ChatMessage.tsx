@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Bot, User } from 'lucide-react';
+import { BrandMark } from '@/components/brand/BrandMark';
 import { useMemo } from 'react';
 
 interface ChatMessageProps {
@@ -10,12 +10,9 @@ interface ChatMessageProps {
   isStreaming?: boolean;
 }
 
-// Simple markdown-like formatting
 function formatContent(content: string): string {
   return content
-    // Bold text
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    // Line breaks
     .replace(/\n/g, '<br />');
 }
 
@@ -30,41 +27,27 @@ export function ChatMessage({ role, content, isStreaming }: ChatMessageProps) {
         isUser ? 'flex-row-reverse' : 'flex-row'
       )}
     >
-      {/* Avatar */}
-      <div
-        className={cn(
-          'flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center',
-          isUser ? 'bg-primary text-primary-foreground' : 'bg-muted'
-        )}
-      >
-        {isUser ? (
-          <User className="w-4 h-4" />
-        ) : (
-          <Bot className="w-4 h-4" />
-        )}
-      </div>
+      {!isUser && (
+        <div className="flex-shrink-0 mt-0.5">
+          <BrandMark size={32} />
+        </div>
+      )}
 
-      {/* Message content */}
-      <div
-        className={cn(
-          'flex-1',
-          isUser ? 'text-right' : 'text-left'
-        )}
-      >
+      <div className={cn('flex-1', isUser ? 'text-right' : 'text-left')}>
         <div
           className={cn(
-            'inline-block rounded-none px-4 py-2 max-w-[85%]',
+            'inline-block px-4 py-3 max-w-[85%] text-left',
             isUser
-              ? 'bg-primary text-primary-foreground'
-              : 'bg-muted'
+              ? 'rounded-3xl rounded-tr-md bg-primary text-primary-foreground'
+              : 'rounded-3xl rounded-tl-md bg-card border border-border/70 paper-shadow'
           )}
         >
           <div
-            className="text-sm prose prose-sm dark:prose-invert max-w-none"
+            className="text-sm leading-relaxed max-w-none [&_strong]:font-semibold"
             dangerouslySetInnerHTML={{ __html: formattedContent }}
           />
           {isStreaming && (
-            <span className="inline-flex ml-1">
+            <span className="inline-flex ml-1 align-middle">
               <span className="w-1.5 h-1.5 bg-current rounded-full typing-dot" />
               <span className="w-1.5 h-1.5 bg-current rounded-full typing-dot ml-1" />
               <span className="w-1.5 h-1.5 bg-current rounded-full typing-dot ml-1" />
