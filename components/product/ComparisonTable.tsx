@@ -15,7 +15,7 @@ import { X, GitCompare, ShoppingBag } from 'lucide-react';
 import { useComparison } from '@/lib/context/ComparisonContext';
 import { useCart } from '@/lib/context/CartContext';
 import { formatPrice } from '@/lib/utils';
-import Image from 'next/image';
+import { ProductImage } from './ProductImage';
 
 export function ComparisonTable() {
   const { products, removeFromComparison, clearComparison } = useComparison();
@@ -35,11 +35,9 @@ export function ComparisonTable() {
       label: 'Look',
       render: (product) => (
         <div className="relative h-24 w-24 mx-auto rounded-2xl overflow-hidden bg-muted">
-          <Image
+          <ProductImage
             src={product.imageUrl}
             alt={product.name}
-            fill
-            className="object-cover"
             sizes="96px"
           />
         </div>

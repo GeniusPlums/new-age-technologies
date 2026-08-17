@@ -1,5 +1,15 @@
 # Implementation log
 
+## 2026-08-17 — Product photos and voice mode
+
+Replaced `placehold.co` images (blocked by Vercel image optimization) with Unsplash photos and a fallback tile. Added voice mode: tap the mic to talk (Groq Whisper), Lumin answers aloud (Orpheus TTS, with browser speech fallback).
+
+**Tested**
+- `npx vitest run` — 22 passed
+- `npm run lint` — pass
+- `npx tsc --noEmit` — pass
+- `npx playwright test` — 3 passed (voice controls + checkout)
+
 ## 2026-08-17 — Fix Vercel 404 by setting Next.js framework
 
 Production alias 404ed because the project was created as Framework "Other" and served `public/` (empty). Set framework to Next.js, disabled deployment SSO, and re-pushed `GROQ_API_KEY` via `vercel env add`.

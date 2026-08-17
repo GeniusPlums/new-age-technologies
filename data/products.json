@@ -7,7 +7,7 @@
       "category": "food",
       "subcategory": "snacks",
       "price": 299,
-      "imageUrl": "https://placehold.co/400x400/8B5CF6/FFFFFF?text=Protein+Cookies",
+      "imageUrl": "https://images.unsplash.com/photo-1499636136210-6f4ee39c176b?auto=format&fit=crop&w=900&q=80",
       "brand": "NutriBite",
       "dietary": {
         "isVegan": true,
@@ -17,7 +17,14 @@
         "isOrganic": false,
         "isLowCalorie": false
       },
-      "tags": ["vegan", "protein", "snacks", "cookies", "healthy", "gluten-free"],
+      "tags": [
+        "vegan",
+        "protein",
+        "snacks",
+        "cookies",
+        "healthy",
+        "gluten-free"
+      ],
       "rating": 4.5,
       "inStock": true
     },
@@ -28,7 +35,7 @@
       "category": "food",
       "subcategory": "breakfast",
       "price": 349,
-      "imageUrl": "https://placehold.co/400x400/10B981/FFFFFF?text=Energy+Bars",
+      "imageUrl": "https://images.unsplash.com/photo-1517094078144-2d15cec89054?auto=format&fit=crop&w=900&q=80",
       "brand": "MornFit",
       "dietary": {
         "isVegan": false,
@@ -38,7 +45,14 @@
         "isOrganic": true,
         "isLowCalorie": false
       },
-      "tags": ["breakfast", "protein", "oats", "chia", "energy", "bars"],
+      "tags": [
+        "breakfast",
+        "protein",
+        "oats",
+        "chia",
+        "energy",
+        "bars"
+      ],
       "rating": 4.7,
       "inStock": true
     },
@@ -49,7 +63,7 @@
       "category": "food",
       "subcategory": "snacks",
       "price": 279,
-      "imageUrl": "https://placehold.co/400x400/F59E0B/FFFFFF?text=Quinoa+Bites",
+      "imageUrl": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80",
       "brand": "SuperMunch",
       "dietary": {
         "isVegan": true,
@@ -59,7 +73,14 @@
         "isOrganic": true,
         "isLowCalorie": false
       },
-      "tags": ["quinoa", "gluten-free", "vegan", "superfood", "healthy", "snacks"],
+      "tags": [
+        "quinoa",
+        "gluten-free",
+        "vegan",
+        "superfood",
+        "healthy",
+        "snacks"
+      ],
       "rating": 4.3,
       "inStock": true
     },
@@ -70,7 +91,7 @@
       "category": "food",
       "subcategory": "snacks",
       "price": 199,
-      "imageUrl": "https://placehold.co/400x400/EF4444/FFFFFF?text=Masala+Makhana",
+      "imageUrl": "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=900&q=80",
       "brand": "DesiMunch",
       "dietary": {
         "isVegan": true,
@@ -80,7 +101,14 @@
         "isOrganic": false,
         "isLowCalorie": true
       },
-      "tags": ["makhana", "indian", "spicy", "low-calorie", "vegan", "traditional"],
+      "tags": [
+        "makhana",
+        "indian",
+        "spicy",
+        "low-calorie",
+        "vegan",
+        "traditional"
+      ],
       "rating": 4.6,
       "inStock": true
     },
@@ -91,7 +119,7 @@
       "category": "food",
       "subcategory": "breakfast",
       "price": 449,
-      "imageUrl": "https://placehold.co/400x400/6366F1/FFFFFF?text=Granola+Mix",
+      "imageUrl": "https://images.unsplash.com/photo-1517093157656-b9eccef01cb1?auto=format&fit=crop&w=900&q=80",
       "brand": "MornFit",
       "dietary": {
         "isVegan": false,
@@ -101,7 +129,13 @@
         "isOrganic": true,
         "isLowCalorie": false
       },
-      "tags": ["granola", "breakfast", "organic", "almonds", "cranberry"],
+      "tags": [
+        "granola",
+        "breakfast",
+        "organic",
+        "almonds",
+        "cranberry"
+      ],
       "rating": 4.4,
       "inStock": true
     },
@@ -112,7 +146,7 @@
       "category": "food",
       "subcategory": "spreads",
       "price": 399,
-      "imageUrl": "https://placehold.co/400x400/D97706/FFFFFF?text=Peanut+Butter",
+      "imageUrl": "https://images.unsplash.com/photo-1505253758473-96b7015fcd40?auto=format&fit=crop&w=900&q=80",
       "brand": "NutriBite",
       "dietary": {
         "isVegan": false,
@@ -122,7 +156,13 @@
         "isOrganic": false,
         "isLowCalorie": false
       },
-      "tags": ["peanut butter", "protein", "spread", "no-sugar", "fitness"],
+      "tags": [
+        "peanut butter",
+        "protein",
+        "spread",
+        "no-sugar",
+        "fitness"
+      ],
       "rating": 4.8,
       "inStock": true
     },
@@ -133,7 +173,7 @@
       "category": "food",
       "subcategory": "snacks",
       "price": 549,
-      "imageUrl": "https://placehold.co/400x400/059669/FFFFFF?text=Trail+Mix",
+      "imageUrl": "https://images.unsplash.com/photo-1536591371090-d341366ad729?auto=format&fit=crop&w=900&q=80",
       "brand": "NutriBox",
       "dietary": {
         "isVegan": true,
@@ -143,7 +183,13 @@
         "isOrganic": false,
         "isLowCalorie": false
       },
-      "tags": ["dry fruits", "trail mix", "almonds", "cashews", "healthy"],
+      "tags": [
+        "dry fruits",
+        "trail mix",
+        "almonds",
+        "cashews",
+        "healthy"
+      ],
       "rating": 4.5,
       "inStock": true
     },
@@ -154,7 +200,7 @@
       "category": "food",
       "subcategory": "beverages",
       "price": 299,
-      "imageUrl": "https://placehold.co/400x400/22C55E/FFFFFF?text=Green+Tea",
+      "imageUrl": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=80",
       "brand": "TeaVeda",
       "dietary": {
         "isVegan": true,
@@ -164,7 +210,13 @@
         "isOrganic": true,
         "isLowCalorie": true
       },
-      "tags": ["green tea", "herbal", "antioxidants", "organic", "wellness"],
+      "tags": [
+        "green tea",
+        "herbal",
+        "antioxidants",
+        "organic",
+        "wellness"
+      ],
       "rating": 4.6,
       "inStock": true
     },
@@ -175,16 +227,27 @@
       "category": "fashion",
       "subcategory": "ethnic",
       "price": 1499,
-      "imageUrl": "https://placehold.co/400x400/8B5CF6/FFFFFF?text=Block+Print+Kurta",
+      "imageUrl": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=80",
       "brand": "IndieThreads",
       "style": {
         "type": "ethnic",
-        "occasion": ["casual", "festive", "office"],
+        "occasion": [
+          "casual",
+          "festive",
+          "office"
+        ],
         "fabric": "cotton",
         "fit": "regular",
         "season": "summer"
       },
-      "tags": ["kurta", "ethnic", "cotton", "handblock", "summer", "jaipur"],
+      "tags": [
+        "kurta",
+        "ethnic",
+        "cotton",
+        "handblock",
+        "summer",
+        "jaipur"
+      ],
       "rating": 4.7,
       "inStock": true
     },
@@ -195,16 +258,26 @@
       "category": "fashion",
       "subcategory": "casual",
       "price": 799,
-      "imageUrl": "https://placehold.co/400x400/3B82F6/FFFFFF?text=Oversized+Tee",
+      "imageUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80",
       "brand": "UrbanDrift",
       "style": {
         "type": "streetwear",
-        "occasion": ["casual", "college"],
+        "occasion": [
+          "casual",
+          "college"
+        ],
         "fabric": "cotton",
         "fit": "oversized",
         "season": "all-season"
       },
-      "tags": ["t-shirt", "oversized", "casual", "streetwear", "cotton", "trendy"],
+      "tags": [
+        "t-shirt",
+        "oversized",
+        "casual",
+        "streetwear",
+        "cotton",
+        "trendy"
+      ],
       "rating": 4.4,
       "inStock": true
     },
@@ -215,16 +288,27 @@
       "category": "fashion",
       "subcategory": "formal",
       "price": 1299,
-      "imageUrl": "https://placehold.co/400x400/1F2937/FFFFFF?text=Formal+Shirt",
+      "imageUrl": "https://images.unsplash.com/photo-1596755094514-f87e34085b83?auto=format&fit=crop&w=900&q=80",
       "brand": "ClassicWeave",
       "style": {
         "type": "formal",
-        "occasion": ["office", "meeting", "formal"],
+        "occasion": [
+          "office",
+          "meeting",
+          "formal"
+        ],
         "fabric": "linen-cotton",
         "fit": "slim",
         "season": "summer"
       },
-      "tags": ["shirt", "formal", "linen", "office", "professional", "slim-fit"],
+      "tags": [
+        "shirt",
+        "formal",
+        "linen",
+        "office",
+        "professional",
+        "slim-fit"
+      ],
       "rating": 4.5,
       "inStock": true
     },
@@ -235,16 +319,27 @@
       "category": "fashion",
       "subcategory": "ethnic",
       "price": 1899,
-      "imageUrl": "https://placehold.co/400x400/EC4899/FFFFFF?text=Chikankari+Kurti",
+      "imageUrl": "https://images.unsplash.com/photo-1583391733956-6c78276477e2?auto=format&fit=crop&w=900&q=80",
       "brand": "IndieThreads",
       "style": {
         "type": "ethnic",
-        "occasion": ["festive", "wedding", "party"],
+        "occasion": [
+          "festive",
+          "wedding",
+          "party"
+        ],
         "fabric": "georgette",
         "fit": "regular",
         "season": "all-season"
       },
-      "tags": ["kurti", "chikankari", "embroidered", "ethnic", "lucknow", "festive"],
+      "tags": [
+        "kurti",
+        "chikankari",
+        "embroidered",
+        "ethnic",
+        "lucknow",
+        "festive"
+      ],
       "rating": 4.8,
       "inStock": true
     },
@@ -255,16 +350,27 @@
       "category": "fashion",
       "subcategory": "sportswear",
       "price": 899,
-      "imageUrl": "https://placehold.co/400x400/14B8A6/FFFFFF?text=Track+Pants",
+      "imageUrl": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80",
       "brand": "ActiveEdge",
       "style": {
         "type": "sportswear",
-        "occasion": ["gym", "sports", "casual"],
+        "occasion": [
+          "gym",
+          "sports",
+          "casual"
+        ],
         "fabric": "polyester",
         "fit": "regular",
         "season": "all-season"
       },
-      "tags": ["track pants", "sports", "gym", "dry-fit", "athletic", "workout"],
+      "tags": [
+        "track pants",
+        "sports",
+        "gym",
+        "dry-fit",
+        "athletic",
+        "workout"
+      ],
       "rating": 4.3,
       "inStock": true
     },
@@ -275,16 +381,27 @@
       "category": "fashion",
       "subcategory": "casual",
       "price": 1799,
-      "imageUrl": "https://placehold.co/400x400/4338CA/FFFFFF?text=Denim+Jacket",
+      "imageUrl": "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=900&q=80",
       "brand": "UrbanDrift",
       "style": {
         "type": "casual",
-        "occasion": ["casual", "party", "date"],
+        "occasion": [
+          "casual",
+          "party",
+          "date"
+        ],
         "fabric": "denim",
         "fit": "regular",
         "season": "winter"
       },
-      "tags": ["denim", "jacket", "casual", "winter", "classic", "layering"],
+      "tags": [
+        "denim",
+        "jacket",
+        "casual",
+        "winter",
+        "classic",
+        "layering"
+      ],
       "rating": 4.6,
       "inStock": true
     },
@@ -295,16 +412,27 @@
       "category": "fashion",
       "subcategory": "ethnic",
       "price": 699,
-      "imageUrl": "https://placehold.co/400x400/F97316/FFFFFF?text=Palazzo+Pants",
+      "imageUrl": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=900&q=80",
       "brand": "IndieThreads",
       "style": {
         "type": "ethnic",
-        "occasion": ["casual", "office", "festive"],
+        "occasion": [
+          "casual",
+          "office",
+          "festive"
+        ],
         "fabric": "rayon",
         "fit": "relaxed",
         "season": "summer"
       },
-      "tags": ["palazzo", "ethnic", "printed", "comfortable", "rayon", "summer"],
+      "tags": [
+        "palazzo",
+        "ethnic",
+        "printed",
+        "comfortable",
+        "rayon",
+        "summer"
+      ],
       "rating": 4.4,
       "inStock": true
     },
@@ -315,16 +443,27 @@
       "category": "fashion",
       "subcategory": "casual",
       "price": 1199,
-      "imageUrl": "https://placehold.co/400x400/78716C/FFFFFF?text=Slim+Chinos",
+      "imageUrl": "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=900&q=80",
       "brand": "ClassicWeave",
       "style": {
         "type": "casual",
-        "occasion": ["office", "casual", "date"],
+        "occasion": [
+          "office",
+          "casual",
+          "date"
+        ],
         "fabric": "cotton-stretch",
         "fit": "slim",
         "season": "all-season"
       },
-      "tags": ["chinos", "slim-fit", "office", "casual", "stretch", "versatile"],
+      "tags": [
+        "chinos",
+        "slim-fit",
+        "office",
+        "casual",
+        "stretch",
+        "versatile"
+      ],
       "rating": 4.5,
       "inStock": true
     },
@@ -335,16 +474,27 @@
       "category": "fashion",
       "subcategory": "accessories",
       "price": 599,
-      "imageUrl": "https://placehold.co/400x400/7C3AED/FFFFFF?text=Ethnic+Stole",
+      "imageUrl": "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=900&q=80",
       "brand": "IndieThreads",
       "style": {
         "type": "ethnic",
-        "occasion": ["festive", "winter", "wedding"],
+        "occasion": [
+          "festive",
+          "winter",
+          "wedding"
+        ],
         "fabric": "wool",
         "fit": "regular",
         "season": "winter"
       },
-      "tags": ["stole", "woolen", "ethnic", "winter", "handwoven", "accessory"],
+      "tags": [
+        "stole",
+        "woolen",
+        "ethnic",
+        "winter",
+        "handwoven",
+        "accessory"
+      ],
       "rating": 4.2,
       "inStock": true
     },
@@ -355,16 +505,27 @@
       "category": "fashion",
       "subcategory": "casual",
       "price": 849,
-      "imageUrl": "https://placehold.co/400x400/6B7280/FFFFFF?text=Joggers",
+      "imageUrl": "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?auto=format&fit=crop&w=900&q=80",
       "brand": "UrbanDrift",
       "style": {
         "type": "casual",
-        "occasion": ["casual", "lounge", "travel"],
+        "occasion": [
+          "casual",
+          "lounge",
+          "travel"
+        ],
         "fabric": "fleece",
         "fit": "relaxed",
         "season": "winter"
       },
-      "tags": ["joggers", "comfortable", "lounge", "casual", "fleece", "relaxed"],
+      "tags": [
+        "joggers",
+        "comfortable",
+        "lounge",
+        "casual",
+        "fleece",
+        "relaxed"
+      ],
       "rating": 4.5,
       "inStock": true
     }

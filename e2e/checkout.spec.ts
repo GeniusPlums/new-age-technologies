@@ -9,7 +9,7 @@ const cart = {
       category: 'food',
       subcategory: 'snacks',
       price: 299,
-      imageUrl: 'https://placehold.co/400x400/8B5CF6/FFFFFF?text=Protein+Cookies',
+      imageUrl: 'https://images.unsplash.com/photo-1499636136210-6f4ee39c176b?auto=format&fit=crop&w=900&q=80',
       brand: 'NutriBite',
       tags: ['vegan'],
       rating: 4.5,

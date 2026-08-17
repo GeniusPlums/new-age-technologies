@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { ProductImage } from './ProductImage';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -34,11 +34,9 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <Card className="overflow-hidden rounded-3xl border-border/70 paper-shadow hover:-translate-y-0.5 transition-transform duration-200 flex flex-col bg-card">
       <div className="relative aspect-[4/5] bg-muted">
-        <Image
+        <ProductImage
           src={product.imageUrl}
           alt={product.name}
-          fill
-          className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute top-3 left-3">

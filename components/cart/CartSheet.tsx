@@ -14,7 +14,7 @@ import { ShoppingBag, Minus, Plus, Trash2 } from 'lucide-react';
 import { useCart } from '@/lib/context/CartContext';
 import { useShopUi } from '@/lib/context/ShopUiContext';
 import { formatPrice } from '@/lib/utils';
-import Image from 'next/image';
+import { ProductImage } from '@/components/product/ProductImage';
 
 export function CartSheet() {
   const { state, removeItem, updateQuantity, clearCart } = useCart();
@@ -61,11 +61,9 @@ export function CartSheet() {
                 {state.items.map((item) => (
                   <div key={item.id} className="flex gap-4">
                     <div className="relative h-20 w-20 rounded-2xl overflow-hidden bg-muted flex-shrink-0">
-                      <Image
+                      <ProductImage
                         src={item.imageUrl}
                         alt={item.name}
-                        fill
-                        className="object-cover"
                         sizes="80px"
                       />
                     </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useChat } from 'ai/react';
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef, useMemo, useState } from 'react';
 import { ChatMessage } from './ChatMessage';
 import { ChatInput } from './ChatInput';
 import { WelcomeMessage } from './WelcomeMessage';
@@ -13,6 +13,7 @@ import { useCart } from '@/lib/context/CartContext';
 import { useComparison } from '@/lib/context/ComparisonContext';
 import { useShopUi } from '@/lib/context/ShopUiContext';
 import { BrandMark } from '@/components/brand/BrandMark';
+import { useVoicePlayback } from '@/hooks/useVoicePlayback';
 import type { ScoredProduct, Product } from '@/lib/types';
 
 interface StreamDataItem {
@@ -31,6 +32,9 @@ export function ChatContainer() {
   const { addToComparison, products: comparisonProducts } = useComparison();
   const { setCartOpen, openCheckout, openOrders } = useShopUi();
   const processedActionsRef = useRef<Set<string>>(new Set());
+  const [voiceEnabled, setVoiceEnabled] = useState(false);
+  const spokenMessageIdRef = useRef<string | null>(null);
+  const { speak, stop: stopSpeaking } = useVoicePlayback();
 
   const { products, lastAction } = useMemo(() => {
     if (!data || data.length === 0) return { products: [], lastAction: null };
@@ -87,6 +91,23 @@ export function ChatContainer() {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages, products, comparisonProducts]);
+
+  useEffect(() => {
+    if (!voiceEnabled) {
+      stopSpeaking();
+      return;
+    }
+    if (isLoading) return;
+    const last = messages[messages.length - 1];
+    if (
+      last?.role === 'assistant' &&
+      last.content &&
+      last.id !== spokenMessageIdRef.current
+    ) {
+      spokenMessageIdRef.current = last.id;
+      void speak(last.content);
+    }
+  }, [voiceEnabled, isLoading, messages, speak, stopSpeaking]);
 
   const handleSampleQuery = (query: string) => {
     append({ role: 'user', content: query });
@@ -159,7 +180,12 @@ export function ChatContainer() {
 
       <div className="bg-gradient-to-t from-background via-background/95 to-transparent">
         <div className="max-w-4xl mx-auto">
-          <ChatInput onSubmit={handleFormSubmit} isLoading={isLoading} />
+          <ChatInput
+            onSubmit={handleFormSubmit}
+            isLoading={isLoading}
+            voiceEnabled={voiceEnabled}
+            onVoiceEnabledChange={setVoiceEnabled}
+          />
         </div>
       </div>
     </div>
