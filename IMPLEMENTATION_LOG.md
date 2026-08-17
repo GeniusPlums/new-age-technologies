@@ -8,7 +8,7 @@ Voice mode heard "kirtan" for "kurta under 500" and showed unrelated catalog pho
 - `npx vitest run` — 31 passed
 - `npm run lint` — pass
 - `npx tsc --noEmit` — pass
-- Production Playwright — 19 passed, 7 failed (kurta/kirtan STT and search passed; follow-up matcher/image waits in this commit)
+- Production Playwright on https://new-age-technologies-chi.vercel.app — **26 passed** (checkout, kurta/kirtan search, STT round-trips, food vs fashion, image loading)
 
 ## 2026-08-17 — Product photos and voice mode
 
