@@ -1,4 +1,8 @@
 import { GROQ_WHISPER_MODEL, groqApiKey } from '@/lib/voice/speech';
+import {
+  WHISPER_SHOPPING_PROMPT,
+  correctShoppingTranscript,
+} from '@/lib/voice/correct-transcript';
 
 export const maxDuration = 30;
 
@@ -18,6 +22,9 @@ export async function POST(req: Request) {
     const groqForm = new FormData();
     groqForm.append('file', file, file.name || 'speech.webm');
     groqForm.append('model', GROQ_WHISPER_MODEL);
+    groqForm.append('language', 'en');
+    groqForm.append('temperature', '0');
+    groqForm.append('prompt', WHISPER_SHOPPING_PROMPT);
     groqForm.append('response_format', 'json');
 
     const response = await fetch(
@@ -40,7 +47,8 @@ export async function POST(req: Request) {
       );
     }
 
-    const text = typeof payload.text === 'string' ? payload.text.trim() : '';
+    const raw = typeof payload.text === 'string' ? payload.text.trim() : '';
+    const text = correctShoppingTranscript(raw);
     if (!text) {
       return Response.json({ error: 'No speech detected' }, { status: 422 });
     }

@@ -50,6 +50,53 @@ describe('matchProducts', () => {
     expect(results[0].matchScore).toBeGreaterThanOrEqual(40);
   });
 
+  it('maps kirtan to kurtas and keeps results under budget', () => {
+    const results = matchProducts(
+      products,
+      context({
+        category: 'fashion',
+        budget: { max: 500, hasConstraint: true },
+        keywords: ['kirtan'],
+        originalQuery: 'kirtan under 500',
+      })
+    );
+
+    expect(results.length).toBeGreaterThan(0);
+    expect(results.every((product) => product.price <= 500)).toBe(true);
+    expect(results.every((product) => /kurta|kurti/i.test(product.name))).toBe(true);
+    expect(results.some((product) => product.id === 'fashion-011')).toBe(true);
+  });
+
+  it('does not dump unrelated products for an unknown item', () => {
+    const results = matchProducts(
+      products,
+      context({
+        category: 'unknown',
+        budget: { max: 500, hasConstraint: true },
+        keywords: ['xylophone'],
+        originalQuery: 'xylophone under 500',
+      })
+    );
+
+    expect(results).toEqual([]);
+  });
+
+  it('hard-filters products over the stated budget', () => {
+    const results = matchProducts(
+      products,
+      context({
+        category: 'fashion',
+        budget: { max: 500, hasConstraint: true },
+        keywords: ['kurta'],
+        originalQuery: 'kurta under 500',
+      })
+    );
+
+    expect(results.every((product) => product.price <= 500)).toBe(true);
+    expect(results.some((product) => /kurta/i.test(product.name))).toBe(true);
+    expect(results.some((product) => product.price === 1499)).toBe(false);
+  });
+
   it('filters out-of-stock products', () => {
     const withOos = [
       ...products,

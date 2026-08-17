@@ -103,6 +103,7 @@ export function ChatInput({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
+          data-testid="chat-input"
           placeholder={
             isRecording
               ? 'Listening… tap the square when you are done'

@@ -1,5 +1,15 @@
 # Implementation log
 
+## 2026-08-17 — Production e2e for kurta/kirtan voice misses
+
+Voice mode heard "kirtan" for "kurta under 500" and showed unrelated catalog photos. Added a production Playwright suite covering that miss plus homophones, budget, food vs fashion, and image loading. Whisper now gets a shopping prompt and kirtan→kurta correction; matching maps kirtan to kurtas, drops unknown terms, and hard-filters over-budget items. Catalog gained an Everyday Cotton Kurta at ₹449 so under-₹500 kurtas exist.
+
+**Tested**
+- `npx vitest run` — 28 passed
+- `npm run lint` — pass
+- `npx tsc --noEmit` — pass
+- Production Playwright — pending deploy
+
 ## 2026-08-17 — Product photos and voice mode
 
 Replaced `placehold.co` images (blocked by Vercel image optimization) with Unsplash photos and a fallback tile. Added voice mode: tap the mic to talk (Groq Whisper), Lumin answers aloud (Orpheus TTS, with browser speech fallback).

@@ -9,6 +9,75 @@ const SCORE_WEIGHTS = {
 
 const MINIMUM_SCORE_THRESHOLD = 40;
 
+const STOPWORDS = new Set([
+  'under',
+  'below',
+  'less',
+  'than',
+  'show',
+  'find',
+  'want',
+  'need',
+  'please',
+  'something',
+  'cheap',
+  'cheaper',
+  'options',
+  'rupees',
+  'rupee',
+  'rs',
+  'the',
+  'for',
+  'and',
+  'with',
+  'some',
+  'looking',
+]);
+
+const CATEGORY_WORDS = new Set([
+  'fashion',
+  'food',
+  'wear',
+  'clothes',
+  'clothing',
+  'outfit',
+  'outfits',
+  'snacks',
+  'snack',
+  'breakfast',
+  'ethnic',
+  'casual',
+  'formal',
+]);
+
+const KEYWORD_ALIASES: Record<string, string[]> = {
+  kurta: ['kurta', 'kurtas', 'kurti', 'kurtis'],
+  kurtas: ['kurta', 'kurtas', 'kurti', 'kurtis'],
+  kurti: ['kurta', 'kurtas', 'kurti', 'kurtis'],
+  kurtis: ['kurta', 'kurtas', 'kurti', 'kurtis'],
+  kirtan: ['kurta', 'kurtas', 'kurti', 'kurtis'],
+  kirtans: ['kurta', 'kurtas', 'kurti', 'kurtis'],
+  kirten: ['kurta', 'kurtas', 'kurti', 'kurtis'],
+  curtain: ['kurta', 'kurtas', 'kurti', 'kurtis'],
+  curtains: ['kurta', 'kurtas', 'kurti', 'kurtis'],
+  tee: ['tee', 'tees', 't-shirt', 'tshirt'],
+  tees: ['tee', 'tees', 't-shirt', 'tshirt'],
+  tshirt: ['tee', 't-shirt', 'tshirt'],
+  't-shirt': ['tee', 't-shirt', 'tshirt'],
+};
+
+function expandKeyword(keyword: string): string[] {
+  const lower = keyword.toLowerCase();
+  return KEYWORD_ALIASES[lower] || [lower];
+}
+
+export function specificProductKeywords(keywords: string[]): string[] {
+  return keywords.filter((keyword) => {
+    const lower = keyword.toLowerCase();
+    return lower.length > 2 && !STOPWORDS.has(lower) && !/^\d+$/.test(lower);
+  });
+}
+
 function calculateCategoryScore(product: Product, context: ExtractedContext): number {
   if (context.category === 'unknown' || context.category === 'both') {
     return SCORE_WEIGHTS.category * 0.5; // Partial match for unknown/both
@@ -176,9 +245,10 @@ function calculateKeywordScore(
   const reasons: string[] = [];
 
   for (const keyword of context.keywords) {
-    if (productText.includes(keyword.toLowerCase())) {
+    const aliases = expandKeyword(keyword);
+    if (aliases.some((alias) => productText.includes(alias))) {
       matchedKeywords++;
-      if (product.name.toLowerCase().includes(keyword.toLowerCase())) {
+      if (aliases.some((alias) => product.name.toLowerCase().includes(alias))) {
         reasons.push(`Matches "${keyword}"`);
       }
     }
@@ -192,8 +262,16 @@ export function matchProducts(
   products: Product[],
   context: ExtractedContext
 ): ScoredProduct[] {
+  const specificKeywords = specificProductKeywords(context.keywords).filter(
+    (keyword) => !CATEGORY_WORDS.has(keyword.toLowerCase())
+  );
+
   const scoredProducts: ScoredProduct[] = products
     .filter((p) => p.inStock)
+    .filter((product) => {
+      if (!context.budget.hasConstraint || !context.budget.max) return true;
+      return product.price <= context.budget.max;
+    })
     .map((product) => {
       const categoryScore = calculateCategoryScore(product, context);
       const budgetScore = calculateBudgetScore(product, context);
@@ -225,10 +303,16 @@ export function matchProducts(
         ...product,
         matchScore,
         matchReasons: matchReasons.slice(0, 3), // Max 3 reasons
+        keywordScore,
       };
     })
     .filter((p) => p.matchScore >= MINIMUM_SCORE_THRESHOLD)
-    .sort((a, b) => b.matchScore - a.matchScore);
+    .filter((p) => {
+      if (specificKeywords.length === 0) return true;
+      return p.keywordScore > 0;
+    })
+    .sort((a, b) => b.matchScore - a.matchScore)
+    .map(({ keywordScore: _keywordScore, ...product }) => product);
 
   return scoredProducts.slice(0, 5); // Return top 5 matches
 }

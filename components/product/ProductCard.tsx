@@ -32,7 +32,14 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Card className="overflow-hidden rounded-3xl border-border/70 paper-shadow hover:-translate-y-0.5 transition-transform duration-200 flex flex-col bg-card">
+    <Card
+      className="overflow-hidden rounded-3xl border-border/70 paper-shadow hover:-translate-y-0.5 transition-transform duration-200 flex flex-col bg-card"
+      data-testid="product-card"
+      data-product-id={product.id}
+      data-product-name={product.name}
+      data-product-price={String(product.price)}
+      data-product-category={product.category}
+    >
       <div className="relative aspect-[4/5] bg-muted">
         <ProductImage
           src={product.imageUrl}

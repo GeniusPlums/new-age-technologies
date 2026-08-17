@@ -10,7 +10,8 @@
     "generate-images": "npx tsx scripts/generate-images.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "e2e:prod": "playwright test"
   },
   "dependencies": {
     "@ai-sdk/groq": "^1.2.9",

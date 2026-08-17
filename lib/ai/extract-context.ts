@@ -58,6 +58,11 @@ export async function extractContext(
   query: string,
   conversationHistory?: Array<{ role: string; content: string }>
 ): Promise<ExtractedContext> {
+  // A fresh thread must not inherit another shopper's last search.
+  if (!conversationHistory || conversationHistory.length === 0) {
+    lastContext = null;
+  }
+
   // Build conversation context summary
   const recentMessages = conversationHistory?.slice(-6) || [];
   const historyContext = recentMessages
@@ -99,6 +104,11 @@ Instructions:
 5. Budget is in INR (₹). Common patterns: "under X", "below X", "less than X", "within X"
 
 Be generous with detecting follow-ups. Phrases like "show me cheaper", "something else", "more options", "different color", "lower price" are ALL follow-ups.
+
+VOICE / HOMOPHONE CORRECTIONS:
+- In this shop, "kirtan", "kirten", "khurta", or "curtain" almost always means "kurta"
+- Set keywords to include "kurta" (and "kurti" if relevant), category fashion
+- Never treat kirtan as music, playlists, or an unknown product that should browse the whole catalog
 
 CART ACTION DETECTION:
 - "add to cart", "buy this", "I'll take it", "add the first one" → intent: add_to_cart
