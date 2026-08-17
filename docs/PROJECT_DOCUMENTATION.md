@@ -365,7 +365,9 @@ Guidelines:
 | Smart Recommendations | Weighted scoring considers budget, preferences, keywords |
 | Conversational Refinement | Follow-up queries preserve context |
 | Product Comparison | Side-by-side analysis of up to 3 products |
-| Cart Management | Add, remove, view cart through chat |
+| Cart Management | Add, remove, view bag through chat or the header |
+| Checkout & payments | Mock UPI, card, and COD with GST, shipping, and order IDs |
+| Order history | Past mock orders stored on-device |
 | Match Explanations | Shows why each product was recommended |
 | Streaming Responses | Real-time AI response generation |
 
@@ -404,9 +406,11 @@ e-com/
 
 ## 7. Future Enhancements
 
+- [x] Mock checkout (UPI / card / COD) and order history
+- [x] Saved delivery preferences (on-device)
+- [ ] Real payment gateway (Razorpay)
 - [ ] Real database integration (PostgreSQL/MongoDB)
-- [ ] User authentication & preferences
-- [ ] Order history & reordering
+- [ ] User authentication
 - [ ] Voice input support
 - [ ] Multi-language support (Hindi, regional)
 - [ ] Advanced filtering UI

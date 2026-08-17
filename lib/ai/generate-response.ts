@@ -1,7 +1,7 @@
 import { streamText } from 'ai';
 import type { ExtractedContext, ScoredProduct, Product } from '@/lib/types';
 import { formatPrice } from '@/lib/utils';
-import { AI_PRESETS, getGeminiModel, getProviderOptions, DEFAULT_TEMPERATURE } from './config';
+import { AI_PRESETS, DEFAULT_TEMPERATURE } from './config';
 
 export async function generateRecommendationResponse(
   context: ExtractedContext,
@@ -184,5 +184,31 @@ Guidelines:
     prompt: `Compare these ${products.length} products for the user:\n\n${productDetails}`,
     temperature: DEFAULT_TEMPERATURE,
     experimental_providerMetadata: AI_PRESETS.analysis.providerOptions,
+  });
+}
+
+export async function generateCheckoutResponse() {
+  const systemPrompt = `You are Lumin, a warm shopping assistant. The checkout panel is opening so the user can pay with mock UPI, card, or cash on delivery.
+
+Keep it to 1-2 sentences. Mention they can complete payment in the checkout panel. Do not invent order IDs.`;
+
+  return streamText({
+    model: AI_PRESETS.chat.model,
+    system: systemPrompt,
+    prompt: 'The user wants to checkout and pay.',
+    temperature: DEFAULT_TEMPERATURE,
+    experimental_providerMetadata: AI_PRESETS.chat.providerOptions,
+  });
+}
+
+export async function generateOrdersResponse() {
+  const systemPrompt = `You are Lumin. The orders panel is opening. In one short sentence, tell the user they can review past mock orders there.`;
+
+  return streamText({
+    model: AI_PRESETS.chat.model,
+    system: systemPrompt,
+    prompt: 'The user wants to see their orders.',
+    temperature: DEFAULT_TEMPERATURE,
+    experimental_providerMetadata: AI_PRESETS.chat.providerOptions,
   });
 }

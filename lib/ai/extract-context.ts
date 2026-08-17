@@ -13,8 +13,10 @@ const contextSchema = z.object({
     'other',
     'add_to_cart',
     'view_cart',
-    'remove_from_cart'
-  ]).describe('Detect user intent including cart actions like "add to cart", "show my cart", "remove from cart"'),
+    'remove_from_cart',
+    'checkout',
+    'view_orders',
+  ]).describe('Detect user intent including cart, checkout, and order history'),
   category: z.enum(['food', 'fashion', 'both', 'unchanged']).describe('Use "unchanged" if user is refining previous search without mentioning category'),
   budget: z.object({
     min: z.number().optional(),
@@ -100,9 +102,13 @@ Be generous with detecting follow-ups. Phrases like "show me cheaper", "somethin
 
 CART ACTION DETECTION:
 - "add to cart", "buy this", "I'll take it", "add the first one" → intent: add_to_cart
-- "show my cart", "what's in my cart", "view cart" → intent: view_cart
+- "show my cart", "what's in my bag", "view cart" → intent: view_cart
 - "remove from cart", "take out", "delete from cart" → intent: remove_from_cart
 - For cart actions, extract the product name if mentioned (e.g., "add the kurta to cart" → productName: "kurta")
+
+CHECKOUT AND ORDERS:
+- "checkout", "pay", "place order", "buy now", "complete purchase" → intent: checkout
+- "my orders", "order history", "track order" → intent: view_orders
 
 COMPARISON DETECTION:
 - "compare these", "which is better", "compare the first two" → intent: comparison
@@ -190,7 +196,15 @@ COMPARISON DETECTION:
     }
 
     // Save context for next turn
-    if (finalContext.intent !== 'greeting' && finalContext.intent !== 'other') {
+    if (
+      finalContext.intent !== 'greeting' &&
+      finalContext.intent !== 'other' &&
+      finalContext.intent !== 'checkout' &&
+      finalContext.intent !== 'view_orders' &&
+      finalContext.intent !== 'view_cart' &&
+      finalContext.intent !== 'add_to_cart' &&
+      finalContext.intent !== 'remove_from_cart'
+    ) {
       lastContext = finalContext;
     }
 

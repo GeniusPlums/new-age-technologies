@@ -3,6 +3,8 @@ import { Fraunces, Outfit } from 'next/font/google';
 import './globals.css';
 import { CartProvider } from '@/lib/context/CartContext';
 import { ComparisonProvider } from '@/lib/context/ComparisonContext';
+import { OrderProvider } from '@/lib/context/OrderContext';
+import { ShopUiProvider } from '@/lib/context/ShopUiContext';
 
 const outfit = Outfit({
   subsets: ['latin'],
@@ -29,9 +31,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.variable} ${fraunces.variable} font-sans`}>
-        <CartProvider>
-          <ComparisonProvider>{children}</ComparisonProvider>
-        </CartProvider>
+        <ShopUiProvider>
+          <CartProvider>
+            <OrderProvider>
+              <ComparisonProvider>{children}</ComparisonProvider>
+            </OrderProvider>
+          </CartProvider>
+        </ShopUiProvider>
       </body>
     </html>
   );

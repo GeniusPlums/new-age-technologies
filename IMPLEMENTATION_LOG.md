@@ -1,5 +1,19 @@
 # Implementation log
 
+## 2026-08-17 — Mock checkout, payments, and orders
+
+Added an Indian-market checkout path so the shopping loop is complete without a live gateway.
+
+**What changed**
+- Mock payment processor: UPI, card, cash on delivery. Catalog prices are re-applied server-side. Cards ending in `0000` are declined.
+- Checkout and orders sheets, wired from the bag, header, and chat (`checkout` / `view_orders`).
+- GST (5%), free shipping over ₹499, and on-device order + delivery preference storage.
+
+**Tested**
+- `npx vitest run` — 16 passed (checkout totals/validation, matcher, `/api/checkout` reprice)
+- `npx playwright test` — 2 passed (UPI success + declined card browser journey)
+- `npx tsc --noEmit` — pass
+
 ## 2026-08-17 — Visual rebrand to a warm shopping atelier
 
 Replaced the black, sharp-cornered, lime chatbot chrome with a light editorial identity so the product reads as a new app, not a restyle of the old one.

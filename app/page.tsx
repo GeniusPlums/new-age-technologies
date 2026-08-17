@@ -1,5 +1,7 @@
 import { ChatContainer } from '@/components/chat/ChatContainer';
 import { CartSheet } from '@/components/cart/CartSheet';
+import { CheckoutSheet } from '@/components/checkout/CheckoutSheet';
+import { OrdersSheet } from '@/components/orders/OrdersSheet';
 import { BrandMark } from '@/components/brand/BrandMark';
 
 export default function Home() {
@@ -16,13 +18,17 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <CartSheet />
+          <div className="flex items-center gap-2">
+            <OrdersSheet />
+            <CartSheet />
+          </div>
         </div>
       </header>
 
       <div className="relative flex-1 overflow-hidden">
         <ChatContainer />
       </div>
+      <CheckoutSheet />
     </main>
   );
 }

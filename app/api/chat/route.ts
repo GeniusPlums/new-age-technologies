@@ -7,6 +7,8 @@ import {
   generateOtherResponse,
   generateCartResponse,
   generateComparisonResponse,
+  generateCheckoutResponse,
+  generateOrdersResponse,
 } from '@/lib/ai/generate-response';
 import { matchProducts } from '@/lib/recommendation/matcher';
 import productsData from '@/data/products.json';
@@ -99,6 +101,20 @@ export async function POST(req: Request) {
     if (context.intent === 'remove_from_cart') {
       data.append(JSON.parse(JSON.stringify({ action: 'remove_from_cart' })));
       const result = await generateCartResponse('remove');
+      data.close();
+      return result.toDataStreamResponse({ data });
+    }
+
+    if (context.intent === 'checkout') {
+      data.append(JSON.parse(JSON.stringify({ action: 'open_checkout' })));
+      const result = await generateCheckoutResponse();
+      data.close();
+      return result.toDataStreamResponse({ data });
+    }
+
+    if (context.intent === 'view_orders') {
+      data.append(JSON.parse(JSON.stringify({ action: 'view_orders' })));
+      const result = await generateOrdersResponse();
       data.close();
       return result.toDataStreamResponse({ data });
     }

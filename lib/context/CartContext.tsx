@@ -72,7 +72,8 @@ function cartReducer(state: CartState, action: CartAction): CartState {
   }
 }
 
-const STORAGE_KEY = 'shopsmart-cart';
+export const CART_STORAGE_KEY = 'lumin-cart';
+const STORAGE_KEY = CART_STORAGE_KEY;
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, {
@@ -80,6 +81,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     totalItems: 0,
     totalPrice: 0,
   });
+  const [hydrated, setHydrated] = React.useState(false);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -93,17 +95,20 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
     } catch (error) {
       console.error('Failed to load cart from localStorage:', error);
+    } finally {
+      setHydrated(true);
     }
   }, []);
 
-  // Save to localStorage on change
+  // Save to localStorage on change after hydration
   useEffect(() => {
+    if (!hydrated) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch (error) {
       console.error('Failed to save cart to localStorage:', error);
     }
-  }, [state]);
+  }, [state, hydrated]);
 
   const addItem = (product: Product) => {
     dispatch({ type: 'ADD_ITEM', product });

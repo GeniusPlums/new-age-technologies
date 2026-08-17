@@ -12,19 +12,22 @@ import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ShoppingBag, Minus, Plus, Trash2 } from 'lucide-react';
 import { useCart } from '@/lib/context/CartContext';
+import { useShopUi } from '@/lib/context/ShopUiContext';
 import { formatPrice } from '@/lib/utils';
 import Image from 'next/image';
 
 export function CartSheet() {
   const { state, removeItem, updateQuantity, clearCart } = useCart();
+  const { cartOpen, setCartOpen, openCheckout } = useShopUi();
 
   return (
-    <Sheet>
+    <Sheet open={cartOpen} onOpenChange={setCartOpen}>
       <SheetTrigger asChild>
         <Button
           variant="outline"
           size="icon"
           className="relative rounded-full h-11 w-11 border-border/80"
+          data-testid="cart-trigger"
         >
           <ShoppingBag className="h-5 w-5" />
           {state.totalItems > 0 && (
@@ -131,7 +134,12 @@ export function CartSheet() {
                 </div>
               </div>
               <div className="mt-4 space-y-2">
-                <Button className="w-full rounded-full" size="lg">
+                <Button
+                  className="w-full rounded-full"
+                  size="lg"
+                  data-testid="checkout-button"
+                  onClick={openCheckout}
+                >
                   Checkout
                 </Button>
                 <Button

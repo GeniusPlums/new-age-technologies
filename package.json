@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-images": "npx tsx scripts/generate-images.ts"
+    "generate-images": "npx tsx scripts/generate-images.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "e2e": "playwright test"
   },
   "dependencies": {
     "@ai-sdk/google": "^1.2.0",
@@ -38,6 +41,8 @@
   "devDependencies": {
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.35",
-    "tsx": "^4.7.0"
+    "tsx": "^4.7.0",
+    "vitest": "^3.2.4",
+    "@playwright/test": "^1.55.0"
   }
 }

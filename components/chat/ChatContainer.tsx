@@ -11,12 +11,13 @@ import { ComparisonTable } from '@/components/product/ComparisonTable';
 import { AlertCircle } from 'lucide-react';
 import { useCart } from '@/lib/context/CartContext';
 import { useComparison } from '@/lib/context/ComparisonContext';
+import { useShopUi } from '@/lib/context/ShopUiContext';
 import { BrandMark } from '@/components/brand/BrandMark';
 import type { ScoredProduct, Product } from '@/lib/types';
 
 interface StreamDataItem {
   products?: ScoredProduct[];
-  action?: 'add_to_cart' | 'view_cart' | 'remove_from_cart' | 'compare';
+  action?: 'add_to_cart' | 'view_cart' | 'remove_from_cart' | 'compare' | 'open_checkout' | 'view_orders';
   product?: Product;
 }
 
@@ -28,6 +29,7 @@ export function ChatContainer() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { addItem } = useCart();
   const { addToComparison, products: comparisonProducts } = useComparison();
+  const { setCartOpen, openCheckout, openOrders } = useShopUi();
   const processedActionsRef = useRef<Set<string>>(new Set());
 
   const { products, lastAction } = useMemo(() => {
@@ -50,19 +52,29 @@ export function ChatContainer() {
   }, [data]);
 
   useEffect(() => {
-    if (lastAction?.action === 'add_to_cart' && lastAction.product) {
-      const actionKey = `add_${lastAction.product.id}_${Date.now()}`;
-      if (!processedActionsRef.current.has(actionKey)) {
-        processedActionsRef.current.add(actionKey);
-        addItem(lastAction.product);
-      }
+    if (!lastAction?.action) return;
+    const actionKey = `${lastAction.action}_${lastAction.product?.id || ''}_${messages.length}`;
+    if (processedActionsRef.current.has(actionKey)) return;
+    processedActionsRef.current.add(actionKey);
+
+    if (lastAction.action === 'add_to_cart' && lastAction.product) {
+      addItem(lastAction.product);
     }
-    if (lastAction?.action === 'compare' && lastAction.products) {
+    if (lastAction.action === 'compare' && lastAction.products) {
       lastAction.products.forEach((p: ScoredProduct) => {
         addToComparison(p);
       });
     }
-  }, [lastAction, addItem, addToComparison]);
+    if (lastAction.action === 'view_cart') {
+      setCartOpen(true);
+    }
+    if (lastAction.action === 'open_checkout') {
+      openCheckout();
+    }
+    if (lastAction.action === 'view_orders') {
+      openOrders();
+    }
+  }, [lastAction, addItem, addToComparison, messages.length, setCartOpen, openCheckout, openOrders]);
 
   useEffect(() => {
     if (messages.length === 0) {

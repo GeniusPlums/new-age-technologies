@@ -63,8 +63,56 @@ export interface CartAction {
   productId?: string;
 }
 
+export type PaymentMethod = 'upi' | 'card' | 'cod';
+export type PaymentStatus = 'paid' | 'pending' | 'failed';
+
+export interface ShippingAddress {
+  fullName: string;
+  phone: string;
+  email: string;
+  addressLine: string;
+  city: string;
+  state: string;
+  pincode: string;
+}
+
+export interface PaymentDetails {
+  method: PaymentMethod;
+  upiId?: string;
+  cardNumber?: string;
+  cardExpiry?: string;
+  cardCvv?: string;
+  cardName?: string;
+}
+
+export interface CheckoutItem {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  imageUrl?: string;
+  brand?: string;
+}
+
+export interface OrderTotals {
+  subtotal: number;
+  tax: number;
+  shippingFee: number;
+  total: number;
+}
+
+export interface Order {
+  id: string;
+  createdAt: string;
+  items: CheckoutItem[];
+  shipping: ShippingAddress;
+  paymentMethod: PaymentMethod;
+  paymentStatus: PaymentStatus;
+  totals: OrderTotals;
+}
+
 export interface ExtractedContext {
-  intent: 'search' | 'recommendation' | 'comparison' | 'greeting' | 'other' | 'add_to_cart' | 'view_cart' | 'remove_from_cart';
+  intent: 'search' | 'recommendation' | 'comparison' | 'greeting' | 'other' | 'add_to_cart' | 'view_cart' | 'remove_from_cart' | 'checkout' | 'view_orders';
   category: 'food' | 'fashion' | 'both' | 'unknown';
   budget: BudgetConstraint;
   dietaryPreferences: DietaryPreferences;
