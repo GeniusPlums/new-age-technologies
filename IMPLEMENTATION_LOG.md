@@ -1,4 +1,13 @@
-# Implementation log
+## 2026-08-17 — Switch chat AI from Gemini to Groq
+
+Chat, context extraction, and comparison now run on Groq with `GROQ_API_KEY` from `.env.local` (not committed). Extraction uses `openai/gpt-oss-20b`; replies use `openai/gpt-oss-120b`. Image generation still uses Gemini if that key is set.
+
+**Tested**
+- Groq chat completion against this key — pass (`openai/gpt-oss-20b` and `openai/gpt-oss-120b`)
+- `npx vitest run` — 18 passed
+- `npm run lint` — pass
+- `npx tsc --noEmit` — pass
+- `npx playwright test` — 2 passed (checkout UPI + declined card)
 
 ## 2026-08-17 — Mock checkout, payments, and orders
 

@@ -1,7 +1,7 @@
 import { streamText } from 'ai';
 import type { ExtractedContext, ScoredProduct, Product } from '@/lib/types';
 import { formatPrice } from '@/lib/utils';
-import { AI_PRESETS, DEFAULT_TEMPERATURE } from './config';
+import { AI_PRESETS } from './config';
 
 export async function generateRecommendationResponse(
   context: ExtractedContext,
@@ -56,8 +56,7 @@ Write a friendly, conversational response presenting these products to the user.
     model: AI_PRESETS.chat.model,
     system: systemPrompt,
     prompt: userPrompt,
-    temperature: DEFAULT_TEMPERATURE,
-    experimental_providerMetadata: AI_PRESETS.chat.providerOptions,
+    temperature: AI_PRESETS.chat.temperature,
   });
 }
 
@@ -75,8 +74,7 @@ Keep the greeting short and inviting. Suggest 2-3 example queries they could try
     model: AI_PRESETS.chat.model,
     system: systemPrompt,
     prompt: 'The user has just greeted me. Respond warmly and help them get started.',
-    temperature: DEFAULT_TEMPERATURE,
-    experimental_providerMetadata: AI_PRESETS.chat.providerOptions,
+    temperature: AI_PRESETS.chat.temperature,
   });
 }
 
@@ -97,8 +95,7 @@ Category: ${context.category}
 Keywords: ${context.keywords.join(', ')}
 
 Help them refine their search or suggest alternatives.`,
-    temperature: DEFAULT_TEMPERATURE,
-    experimental_providerMetadata: AI_PRESETS.chat.providerOptions,
+    temperature: AI_PRESETS.chat.temperature,
   });
 }
 
@@ -120,8 +117,7 @@ Keep responses brief and friendly.`;
     model: AI_PRESETS.chat.model,
     system: systemPrompt,
     prompt: query,
-    temperature: DEFAULT_TEMPERATURE,
-    experimental_providerMetadata: AI_PRESETS.chat.providerOptions,
+    temperature: AI_PRESETS.chat.temperature,
   });
 }
 
@@ -151,8 +147,7 @@ Keep responses brief (1-2 sentences) and conversational.`;
     model: AI_PRESETS.chat.model,
     system: systemPrompt,
     prompt: prompts[action],
-    temperature: DEFAULT_TEMPERATURE,
-    experimental_providerMetadata: AI_PRESETS.chat.providerOptions,
+    temperature: AI_PRESETS.chat.temperature,
   });
 }
 
@@ -182,8 +177,7 @@ Guidelines:
     model: AI_PRESETS.analysis.model,
     system: systemPrompt,
     prompt: `Compare these ${products.length} products for the user:\n\n${productDetails}`,
-    temperature: DEFAULT_TEMPERATURE,
-    experimental_providerMetadata: AI_PRESETS.analysis.providerOptions,
+    temperature: AI_PRESETS.analysis.temperature,
   });
 }
 
@@ -196,8 +190,7 @@ Keep it to 1-2 sentences. Mention they can complete payment in the checkout pane
     model: AI_PRESETS.chat.model,
     system: systemPrompt,
     prompt: 'The user wants to checkout and pay.',
-    temperature: DEFAULT_TEMPERATURE,
-    experimental_providerMetadata: AI_PRESETS.chat.providerOptions,
+    temperature: AI_PRESETS.chat.temperature,
   });
 }
 
@@ -208,7 +201,6 @@ export async function generateOrdersResponse() {
     model: AI_PRESETS.chat.model,
     system: systemPrompt,
     prompt: 'The user wants to see their orders.',
-    temperature: DEFAULT_TEMPERATURE,
-    experimental_providerMetadata: AI_PRESETS.chat.providerOptions,
+    temperature: AI_PRESETS.chat.temperature,
   });
 }

@@ -1,47 +1,26 @@
-import { google } from '@ai-sdk/google';
+import { groq } from '@ai-sdk/groq';
 
-export type ThinkingLevel = 'minimal' | 'low' | 'medium' | 'high';
+export const GROQ_FAST_MODEL = 'openai/gpt-oss-20b';
+export const GROQ_CHAT_MODEL = 'openai/gpt-oss-120b';
 
-// Gemini 3 Flash model configuration
-export const GEMINI_MODEL = 'gemini-3-flash-preview';
+export const DEFAULT_TEMPERATURE = 0.6;
+export const EXTRACTION_TEMPERATURE = 0.2;
 
-// Gemini 3 requires temperature of 1.0 for optimal performance
-export const DEFAULT_TEMPERATURE = 1.0;
-
-// Get Gemini model with optional thinking level configuration
-export function getGeminiModel(thinkingLevel: ThinkingLevel = 'medium') {
-  return google(GEMINI_MODEL);
+export function getGroqModel(model: string = GROQ_CHAT_MODEL) {
+  return groq(model);
 }
 
-// Provider options for different use cases
-export function getProviderOptions(thinkingLevel: ThinkingLevel = 'medium') {
-  return {
-    google: {
-      thinkingConfig: {
-        thinkingLevel,
-      },
-    },
-  };
-}
-
-// Predefined configurations for common scenarios
 export const AI_PRESETS = {
-  // Fast extraction - minimal thinking for quick context parsing
   extraction: {
-    model: google(GEMINI_MODEL),
-    temperature: DEFAULT_TEMPERATURE,
-    providerOptions: getProviderOptions('minimal'),
+    model: groq(GROQ_FAST_MODEL),
+    temperature: EXTRACTION_TEMPERATURE,
   },
-  // Standard chat - low thinking for responsive conversations
   chat: {
-    model: google(GEMINI_MODEL),
+    model: groq(GROQ_CHAT_MODEL),
     temperature: DEFAULT_TEMPERATURE,
-    providerOptions: getProviderOptions('low'),
   },
-  // Complex analysis - medium thinking for product comparisons
   analysis: {
-    model: google(GEMINI_MODEL),
+    model: groq(GROQ_CHAT_MODEL),
     temperature: DEFAULT_TEMPERATURE,
-    providerOptions: getProviderOptions('medium'),
   },
 } as const;

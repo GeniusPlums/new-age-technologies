@@ -1,7 +1,7 @@
 import { generateObject } from 'ai';
 import { z } from 'zod';
 import type { ExtractedContext } from '@/lib/types';
-import { AI_PRESETS, DEFAULT_TEMPERATURE } from './config';
+import { AI_PRESETS } from './config';
 
 const contextSchema = z.object({
   intent: z.enum([
@@ -120,8 +120,7 @@ COMPARISON DETECTION:
       schema: contextSchema,
       system: systemPrompt,
       prompt: query,
-      temperature: DEFAULT_TEMPERATURE,
-      experimental_providerMetadata: AI_PRESETS.extraction.providerOptions,
+      temperature: AI_PRESETS.extraction.temperature,
     });
 
     // Merge with previous context if this is a follow-up
