@@ -1,3 +1,9 @@
+# Implementation log
+
+## 2026-08-17 — Fix Vercel 404 by setting Next.js framework
+
+Production alias 404ed because the project was created as Framework "Other" and served `public/` (empty). Set framework to Next.js, disabled deployment SSO, and re-pushed `GROQ_API_KEY` via `vercel env add`.
+
 ## 2026-08-17 — Switch chat AI from Gemini to Groq
 
 Chat, context extraction, and comparison now run on Groq with `GROQ_API_KEY` from `.env.local` (not committed). Extraction uses `openai/gpt-oss-20b`; replies use `openai/gpt-oss-120b`. Image generation still uses Gemini if that key is set.
